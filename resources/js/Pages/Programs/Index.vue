@@ -5,7 +5,7 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex flex-wrap sm:flex-no-wrap items-center mb-2">
                         <inertia-link
-                            v-if="$permissions.can([{name: 'create programs'}])"
+                            v-if="$can([{name: 'create programs'}])"
                             class="bg-indigo-500 p-2 hover:bg-indigo-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200"
                             :href="route('programs.create')"
                         >
@@ -40,27 +40,27 @@
                                             <inertia-link
                                                 :href="route('programs.show', program.id)"
                                                 class="disabled text-xs px-4 py-2 rounded-full bg-gray-200 hover:bg-hp-400 hover:text-black text-gray-800 inline-flex items-center"
-                                                v-if="!program.deleted_at && $permissions.can([{name: 'show programs'}, {name: 'show own programs', owner: program.user_id}])"
+                                                v-if="!program.deleted_at && $can([{name: 'show programs'}, {name: 'show own programs', owner: program.user_id}])"
                                             >
                                                 Detalle
                                             </inertia-link>
                                             <inertia-link
                                                 :href="route('programs.edit', program.id)"
                                                 class="disabled text-xs px-4 py-2 rounded-full bg-gray-200 hover:bg-hp-400 hover:text-black text-gray-800 inline-flex items-center"
-                                                v-if="!program.deleted_at && $permissions.can([{name: 'update programs'}, {name: 'update own programs', owner: program.user_id}])"
+                                                v-if="!program.deleted_at && $can([{name: 'update programs'}, {name: 'update own programs', owner: program.user_id}])"
                                             >
                                                 Editar
                                             </inertia-link>
                                             <button
                                                 class="text-xs px-4 py-2 rounded-full bg-red-200 hover:bg-hp-400 hover:text-black text-gray-800 inline-flex items-center"
-                                                v-if="!program.deleted_at && $permissions.can([{name: 'delete programs'}, {name: 'delete own programs', owner: program.user_id}])"
+                                                v-if="!program.deleted_at && $can([{name: 'delete programs'}, {name: 'delete own programs', owner: program.user_id}])"
                                                 @click="remove(program)"
                                             >
                                                 Borrar
                                             </button>
                                             <button
                                                 class="text-xs px-4 py-2 rounded-full bg-red-200 hover:bg-hp-400 hover:text-black text-gray-800 inline-flex items-center"
-                                                v-if="program.deleted_at && $permissions.can([{name: 'restore programs'}, {name: 'restore own programs', owner: program.user_id}])"
+                                                v-if="program.deleted_at && $can([{name: 'restore programs'}, {name: 'restore own programs', owner: program.user_id}])"
                                                 @click="restore(program)"
                                             >
                                                 Restaurar

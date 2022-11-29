@@ -17,13 +17,11 @@ Permissions.install = function(Vue, options) {
              * En este cas tenemos acceso a los usuarios identificados, asi podemos acceder a todos las propiedades de usuario
              */
             const user = Vue.prototype.$page.user;
-
             /**
              * Partimos simulando la puerta de entrada (Gate) Before
              * Si el usuario es Super-Admin, entonces este usuario puede hacer todo!
              */
             if(user.roles[0].name === "Super-Admin") return true;
-
             /**
              * Para otros casos ya entramos a revisar los permisos
              */
@@ -65,4 +63,10 @@ Permissions.install = function(Vue, options) {
     }
 }
 
-export default Permissions;
+export default {
+    install(app, options) {
+        app.config.globalProperties.$can = function (permission) {
+            return options.permissions.includes(permission);
+        }
+    }
+}
